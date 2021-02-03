@@ -1,10 +1,8 @@
 ##########################################################
 #                   ARL DATABASE PROJECT                 #
 ##########################################################
-#Özelleştirilmiş ürün önerlierl geliştirme
-#########################################################
-# Görev 1: Verinin Uzak Sunucu'daki Veri Tabanından Çekilmesi
-#########################################################
+
+#<<<Şule AKÇAY>>>
 
 import datetime as dt
 import pandas as pd
@@ -56,12 +54,6 @@ df_mysql.info()
 df_mysql["InvoiceDate"] = pd.to_datetime(df_mysql["InvoiceDate"])
 df_mysql.rename(columns={"CustomerID": "Customer ID"}, inplace=True)
 
-# df_mysql.index = df_mysql["Customer ID"]
-# df_mysql.drop("Customer ID", axis=1, inplace=True)
-
-######################################
-# Görev 2: crm_data_prep Fonksiyonu ile Veri Ön İşleme Yapınız
-######################################
 
 df.head()
 
@@ -75,9 +67,6 @@ from helpers.helpers import check_df
 
 check_df(df_prep)
 
-######################################
-# Görev 3: create_cltv_p Fonksiyonu ile Predictive CLTV Segmentlerini Oluşturunuz
-######################################
 
 def create_cltv_p(dataframe):
     today_date = dt.datetime(2011, 12, 11)
@@ -174,9 +163,6 @@ cltv_p.head()
 
 cltv_p.groupby("cltv_p_segment").agg({"count", "mean"})
 
-######################################
-# Görev 4: İstenilen segmentlere ait kullanıcı id'lerine göre veri setini indirgeyiniz.
-######################################
 
 # id'lerin alınması
 a_segment_ids = cltv_p[cltv_p["cltv_p_segment"] == "A"].index
@@ -189,9 +175,6 @@ b_segment_df = df_prep[df_prep["Customer ID"].isin(b_segment_ids)]
 c_segment_df = df_prep[df_prep["Customer ID"].isin(c_segment_ids)]
 a_segment_df.head()
 
-######################################
-# Görev 5: Her bir segment için birliktelik kurallarının üretilmesi
-######################################
 
 
 from helpers.helpers import create_invoice_product_df
@@ -230,13 +213,7 @@ def check_id(stock_code):
 
 check_id(12427)
 
-######################################
-# Görev 6: Alman Müşterilere Segmentlerine Göre Öneriler
-######################################
 
-# cltv_p'nin çıktısı olan dataframe'e recommended_product adında bir değişken ekleyiniz.
-# her bir segment için 1 tane ürün ekleyiniz.
-# Yani müşteri hangi segmentte ise onun için yukarıdan gelen kurallardan birisini ekleyiniz.
 
 cltv_p.head()
 
